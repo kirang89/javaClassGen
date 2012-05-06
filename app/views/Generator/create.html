@@ -1,0 +1,99 @@
+#{extends 'layouts/main.html' /}
+#{set title:'Java Class Generator' /}
+<div style="font-size:18px;">
+<table name = "class_params" id = "class_params" style="width:100%;">
+	<tr>
+    	<td width="0%" height="15"></td>
+		<td width="26%"><span class="heading">Java Class Generator</span></td>
+    </tr>
+    <tr>
+    	<td height="15"></td>
+        <td height="15"></td>
+        <td width="1%" height="15"></td>
+        <td width="73%" height="15"></td>
+    </tr>
+    <tr>
+    	<td height="15"></td>
+        <td><span style="font-size:14px; font-weight:700;">Class Name</span></td>
+        <td> :</td>
+        <td><input type = "text" name = "class_name" id = "class_name" style="width:20%; height: 23px;" /></td>
+    </tr>
+     <tr>
+    	<td height="15"></td>
+        <td height="15"></td>
+        <td height="15"></td>
+        <td height="15"></td>
+    </tr>
+    <tr>
+    	<td height="15"></td>
+        <td><span style="font-size:14px; font-weight:700;">Fields(in csv format)</span></td>
+        <td>:</td>
+        <td><input type = "text" name = "fields" id = "fields" style="width:20%; height: 23px;" onfocus = "increase_width(this);" onblur = "decrease_width(this);"/></td>
+    </tr>
+     <tr>
+    	<td height="15"></td>
+        <td height="15"></td>
+        <td height="15"></td>
+        <td height="15"></td>
+    </tr>
+	<tr>
+	    <td height="15"></td>
+        <td><span style="font-size:14px; font-weight:700;">Datatypes(csv format in accordance with fields)</span></td>
+        <td>:</td>
+        <td><input type = "text" name = "datatypes" id = "datatypes" style="width:20%; height: 23px;" onfocus = "increase_width(this);" onblur = "decrease_width(this);"/></td>
+    </tr>
+     <tr>
+    	<td height="15"></td>
+        <td height="15"></td>
+        <td height="15"></td>
+        <td height="15"></td>
+    </tr>
+    <tr>
+     	<td height="15"></td>
+        <td><input type = "button" name = "submit" id = "submit" value = "Generate Class File" style="height:30px;"  onclick="validate();" /></td>
+    </tr>
+</table>
+</div>
+<script type="text/javascript">
+function increase_width(obj)
+{
+	obj.style.width="60%";
+}
+</script>
+<script type="text/javascript">
+function decrease_width(obj)
+{
+	obj.style.width="20%";
+}
+</script>
+<script type="text/javascript">
+function validate()
+{
+	var class_name = document.getElementById("class_name").value;
+	var fields = document.getElementById("fields").value;
+	var datatypes = document.getElementById("datatypes").value;
+	var field_array = fields.split(",");
+	var datatype_array = datatypes.split(",");
+	var allowed_types = "int,String,double,float,boolean";
+	var valid_type = true;
+	
+	for( var i=0; i < datatype_array.length ; i++)
+	{
+		if(allowed_types.indexOf(datatype_array[i]) == -1)
+			valid_type = false;
+	}
+	alert(valid_type);
+	var temp = class_name.charAt(0);
+	if(temp != temp.toUpperCase())
+		alert("Class name should begin with a capital letter");
+	else if(class_name.length <=0 || fields.length <= 0 || datatypes.length <= 0)
+		alert("No field should be empty");
+	else if(field_array.length != datatype_array.length)
+	 	alert("Fields and their types must match");
+	else if(valid_type == false)
+	 	alert("Only " + allowed_types + " types are allowed")
+	else
+	 	window.location = "/makeClass/" + class_name + ".java" + "/" + fields + "/" + datatypes;
+	
+}
+</script>
