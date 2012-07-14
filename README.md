@@ -8,4 +8,4 @@ To run the application, run the following command:
 
 ######play run javaClassGen
 
-Finally, head over to #########http://localhost:9000/create
+Finally, head over to ######http://localhost:9000/create
