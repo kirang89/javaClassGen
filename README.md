@@ -6,6 +6,6 @@ To run this program, you need to first install Play! (http://playframework.org)
 
 To run the application, run the following command:
 
-####play run javaClassGen
+######play run javaClassGen
 
 Finally, head over to http://localhost:9000/create
